@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Задание 3 — AES · Theor Info</title>
+  <link rel="stylesheet" href="../shared/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">
+      <span class="site-logo-mark" aria-hidden="true">Р</span>
+      <div>
+        <p class="eyebrow">Задание 3 · Python</p>
+        <h1 class="h1">AES</h1>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a href="../index.html">Главная</a>
+      <a href="../zadanie2-lz78/index.html">LZ78</a>
+      <a href="index.html" class="is-active">AES</a>
+    </nav>
+  </header>
+
+  <div class="page-wrap">
+    <main class="grid two-col">
+      <section class="card">
+        <h2 class="h2">Параметры</h2>
+        <label>
+          Парольная фраза (ключ)
+          <input id="passphrase" type="password" value="theor-info-2026" autocomplete="off" />
+        </label>
+        <div class="row-2">
+          <label>
+            Длина ключа
+            <select id="keyBits">
+              <option value="128">128 бит</option>
+              <option value="192">192 бит</option>
+              <option value="256" selected>256 бит</option>
+            </select>
+          </label>
+          <label>
+            Режим
+            <input type="text" value="AES-CBC + PKCS#7" readonly />
+          </label>
+        </div>
+        <div id="ivBlock">
+          <label>
+            IV (hex, 32 символа; пусто — сгенерировать)
+            <input id="ivHex" type="text" placeholder="авто" spellcheck="false" />
+          </label>
+          <button id="btnRandomIv" type="button">Случайный IV</button>
+        </div>
+        <p class="hint warn">
+          Шифрование на сервере: FastAPI + cryptography (FIPS-197).
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">Шифрование</h2>
+        <label>
+          Открытый текст
+          <textarea id="plaintext" rows="6">Средство криптографической защиты информации</textarea>
+        </label>
+        <div class="btn-row">
+          <button id="btnEncrypt" type="button" class="primary">Зашифровать</button>
+          <button id="btnSample" type="button">Пример</button>
+        </div>
+        <label>
+          Шифротекст (Base64)
+          <textarea id="ciphertext" rows="5" spellcheck="false"></textarea>
+        </label>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">Дешифрование</h2>
+        <div class="btn-row">
+          <button id="btnDecrypt" type="button" class="primary">Расшифровать</button>
+          <button id="btnWrongKey" type="button" class="danger">Неверный ключ</button>
+        </div>
+        <label>
+          Результат
+          <textarea id="decryptOut" rows="6" readonly></textarea>
+        </label>
+        <p id="status" class="status"></p>
+      </section>
+
+      <section class="card full">
+        <h2 class="h2">Протокол</h2>
+        <pre id="meta" class="mono box"></pre>
+        <ul class="hint">
+          <li><strong>AES-CBC</strong> — IV 16 байт + ciphertext, PKCS#7.</li>
+          <li><strong>Ключ</strong> — SHA-256(фраза), усечение до 16/24/32 байт.</li>
+          <li><strong>Модуль</strong> — <code>aes_protocol.py</code></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

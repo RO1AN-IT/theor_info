@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Задание 2 — LZ78 · Theor Info</title>
+  <link rel="stylesheet" href="../shared/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="../index.html" class="site-logo">
+      <span class="site-logo-mark" aria-hidden="true">Р</span>
+      <div>
+        <p class="eyebrow">Задание 2 · Python</p>
+        <h1 class="h1">LZ78</h1>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a href="../index.html">Главная</a>
+      <a href="index.html" class="is-active">LZ78</a>
+      <a href="../zadanie3-aes/index.html">AES</a>
+    </nav>
+  </header>
+
+  <div class="page-wrap">
+    <main class="grid two-col">
+      <section class="card">
+        <h2 class="h2">Кодирование</h2>
+        <label>
+          Размер словаря (макс. записей)
+          <input id="dictSize" type="number" min="2" max="65536" value="4096" />
+        </label>
+        <label>
+          Исходный текст
+          <textarea id="inputText" rows="8" placeholder="Введите текст…">ababa</textarea>
+        </label>
+        <div class="btn-row">
+          <button id="btnEncode" type="button" class="primary">Закодировать</button>
+          <button id="btnSample1" type="button">ababa</button>
+          <button id="btnSample2" type="button">TOBE…</button>
+          <button id="btnSample3" type="button">Малый словарь</button>
+        </div>
+        <label>
+          Токены (JSON)
+          <textarea id="tokensOut" rows="4" readonly></textarea>
+        </label>
+        <pre id="statsOut" class="mono box"></pre>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">Декодирование</h2>
+        <label>
+          Размер словаря
+          <input id="decodeSize" type="number" min="2" max="65536" value="4096" />
+        </label>
+        <label>
+          Токены
+          <textarea id="decodeTokens" rows="4"></textarea>
+        </label>
+        <div class="btn-row">
+          <button id="btnDecode" type="button" class="primary">Декодировать</button>
+          <button id="btnRoundTrip" type="button">Проверка encode → decode</button>
+        </div>
+        <label>
+          Результат
+          <textarea id="decodeOut" rows="8" readonly></textarea>
+        </label>
+        <p id="status" class="status"></p>
+      </section>
+
+      <section class="card full">
+        <h2 class="h2">Словарь после кодирования</h2>
+        <pre id="dictOut" class="mono box scroll"></pre>
+      </section>
+    </main>
+  </div>
+
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Theor Info — LZ78 и AES</title>
+  <link rel="stylesheet" href="shared/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="site-logo">
+      <span class="site-logo-mark" aria-hidden="true">Р</span>
+      <div>
+        <h1 class="h1">Теория информации</h1>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a href="index.html" class="is-active">Главная</a>
+      <a href="zadanie2-lz78/index.html">LZ78</a>
+      <a href="zadanie3-aes/index.html">AES</a>
+    </nav>
+  </header>
+
+  <div class="page-wrap">
+    <section class="hero">
+      <p>
+        Лаборатория сжатия и шифрования: словарный код <strong>LZ78</strong> и протокол
+        <strong>AES</strong>. 
+      </p>
+      <p class="hero-terminal" id="healthLine">Подключение к серверу…</p>
+
+      <div class="cards-home">
+        <a href="zadanie2-lz78/index.html" class="card-link">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 6h16M4 12h10M4 18h14"/>
+            <circle cx="19" cy="18" r="3"/>
+          </svg>
+          <strong>Задание 2 — LZ78</strong>
+          <span>Словарное кодирование и декодирование с ограничением размера словаря.</span>
+          <span class="tag">сжатие</span>
+        </a>
+        <a href="zadanie3-aes/index.html" class="card-link">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="5" y="11" width="14" height="10" rx="2"/>
+            <path d="M8 11V8a4 4 0 118 0v3"/>
+          </svg>
+          <strong>Задание 3 — AES</strong>
+          <span>Шифрование и дешифрование AES-128/192/256 в режиме CBC.</span>
+          <span class="tag">криптография</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+
+  <script type="module">
+    import { apiGet } from "./shared/api.js";
+    const el = document.getElementById("healthLine");
+    try {
+      const h = await apiGet("/api/health");
+      el.textContent = `Сервер: ${h.status} · backend: ${h.backend}`;
+    } catch {
+      el.textContent = "Запустите сервер: cd backend && uvicorn main:app --reload --port 8000";
+      el.style.color = "#38BDF8";
+    }
+  </script>
+</body>
+</html>

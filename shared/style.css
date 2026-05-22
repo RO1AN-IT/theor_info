@@ -1,0 +1,526 @@
+/* Theor Info — современная кибербезопасность (ui-ux-pro-max)
+   Void #020617 | Signal #22C55E | Pulse #38BDF8
+   Текст: #F8FAFC (slate-50, из той же SOC-палитры)
+   Fira Sans + Fira Code */
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600&family=Fira+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --void: #020617;
+  --signal: #22c55e;
+  --pulse: #38bdf8;
+  --text: #f8fafc;
+  --panel: #0f172a;
+
+  --font-display: "Fira Code", ui-monospace, monospace;
+  --font-body: "Fira Sans", system-ui, sans-serif;
+
+  --radius: 12px;
+  --radius-lg: 16px;
+  --transition: 200ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--void);
+  line-height: 1.55;
+}
+
+/* Сетка + мягкое свечение (SOC dashboard) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(color-mix(in srgb, var(--pulse) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--pulse) 6%, transparent) 1px, transparent 1px),
+    radial-gradient(
+      ellipse 70% 45% at 50% -15%,
+      color-mix(in srgb, var(--signal) 12%, transparent),
+      transparent 55%
+    ),
+    var(--void);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.04;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--void) 2px,
+    var(--void) 4px
+  );
+}
+
+a {
+  color: var(--pulse);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--transition), opacity var(--transition);
+}
+
+a:hover {
+  color: var(--signal);
+}
+
+.site-header {
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  margin: 1rem 1.25rem 0;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pulse) 28%, transparent);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 24px color-mix(in srgb, var(--void) 70%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.site-logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--void);
+  background: linear-gradient(145deg, var(--signal), var(--pulse));
+  border-radius: 10px;
+  line-height: 1;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--signal) 40%, transparent);
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+h1, .h1 {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+h2, .h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--pulse);
+  letter-spacing: 0.02em;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.site-nav a {
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--text) 75%, var(--void));
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.site-nav a:hover,
+.site-nav a.is-active {
+  border-color: color-mix(in srgb, var(--pulse) 45%, transparent);
+  background: color-mix(in srgb, var(--pulse) 10%, transparent);
+  color: var(--pulse);
+}
+
+.page-wrap {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 2.5rem 1rem 3rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--void);
+  background: var(--signal);
+  border-radius: 6px;
+  cursor: default;
+}
+
+.hero p {
+  max-width: 36rem;
+  margin: 0 auto 2rem;
+  color: color-mix(in srgb, var(--text) 72%, var(--void));
+  font-size: 1.05rem;
+}
+
+.hero-terminal {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--signal);
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal) 35%, transparent);
+  border-radius: var(--radius);
+}
+
+.cards-home {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.card-link {
+  position: relative;
+  display: block;
+  padding: 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  background: var(--panel);
+  border: 1px solid color-mix(in srgb, var(--pulse) 18%, transparent);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.card-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--signal), var(--pulse));
+}
+
+.card-link:hover {
+  border-color: color-mix(in srgb, var(--pulse) 50%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pulse) 25%, transparent),
+    0 12px 40px color-mix(in srgb, var(--void) 50%, transparent);
+}
+
+.card-link .card-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  color: var(--pulse);
+}
+
+.card-link strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-link span {
+  color: color-mix(in srgb, var(--text) 65%, var(--void));
+  font-size: 0.95rem;
+}
+
+.card-link .tag {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.2rem 0.55rem;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--void);
+  background: color-mix(in srgb, var(--signal) 90%, var(--pulse) 10%);
+  border-radius: 4px;
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.two-col {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+.full { grid-column: 1 / -1; }
+
+.card {
+  padding: 1.35rem 1.5rem;
+  background: var(--panel);
+  border: 1px solid color-mix(in srgb, var(--pulse) 15%, transparent);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--void) 65%, transparent);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--text) 70%, var(--void));
+}
+
+input,
+textarea,
+select {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text);
+  background: color-mix(in srgb, var(--void) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pulse) 22%, transparent);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--pulse);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pulse) 20%, transparent);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 5rem;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+}
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+@media (max-width: 500px) {
+  .row-2 { grid-template-columns: 1fr; }
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+button,
+.btn {
+  padding: 0.55rem 1.15rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 80%, var(--pulse) 20%);
+  border: 1px solid color-mix(in srgb, var(--pulse) 30%, transparent);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+button:hover,
+.btn:hover {
+  border-color: color-mix(in srgb, var(--pulse) 55%, transparent);
+  background: color-mix(in srgb, var(--pulse) 12%, var(--panel));
+}
+
+button.primary,
+.btn.primary {
+  color: var(--void);
+  background: var(--signal);
+  border-color: color-mix(in srgb, var(--signal) 80%, var(--pulse) 20%);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--signal) 35%, transparent);
+}
+
+button.primary:hover {
+  background: color-mix(in srgb, var(--signal) 88%, var(--pulse) 12%);
+  border-color: var(--pulse);
+}
+
+button.danger {
+  color: var(--void);
+  background: color-mix(in srgb, var(--pulse) 75%, var(--signal) 25%);
+  border-color: var(--pulse);
+}
+
+button.danger:hover {
+  background: var(--pulse);
+  border-color: color-mix(in srgb, var(--pulse) 70%, var(--signal) 30%);
+}
+
+.mono {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.box {
+  margin: 0;
+  padding: 0.85rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  background: color-mix(in srgb, var(--void) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal) 25%, transparent);
+  border-radius: var(--radius);
+  white-space: pre-wrap;
+  color: var(--signal);
+}
+
+.scroll {
+  max-height: 220px;
+  overflow: auto;
+}
+
+.status {
+  margin: 0.75rem 0 0;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border-radius: var(--radius);
+}
+
+.status.ok {
+  color: var(--signal);
+  background: color-mix(in srgb, var(--signal) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal) 35%, transparent);
+}
+
+.status.error {
+  color: var(--text);
+  background: color-mix(in srgb, var(--pulse) 35%, var(--void));
+  border: 1px solid color-mix(in srgb, var(--pulse) 50%, transparent);
+}
+
+.hint {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--text) 55%, var(--void));
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.hint.warn {
+  list-style: none;
+  padding-left: 0;
+  color: color-mix(in srgb, var(--pulse) 80%, var(--text));
+}
+
+.hint li { margin-bottom: 0.35rem; }
+
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--text) 45%, var(--void));
+}
+
+.palette {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.palette i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid color-mix(in srgb, var(--pulse) 30%, transparent);
+}
+
+code {
+  padding: 0.12em 0.4em;
+  font-family: var(--font-display);
+  font-size: 0.86em;
+  font-weight: 500;
+  color: var(--void);
+  background: color-mix(in srgb, var(--signal) 85%, var(--pulse) 15%);
+  border-radius: 4px;
+}
+
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}

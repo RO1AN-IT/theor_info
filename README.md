@@ -18,6 +18,18 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 На главной странице должна появиться строка `Сервер: ok · backend: python`.
 
+## Деплой на Render
+
+| Поле | Значение |
+|------|----------|
+| **Root Directory** | *(пусто — корень репо)* |
+| **Build Command** | `pip install -r requirements.txt` |
+| **Start Command** | `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT` |
+
+Альтернатива: **Root Directory** = `backend`, тогда Start Command: `uvicorn main:app --host 0.0.0.0 --port $PORT`.
+
+В репозитории есть `render.yaml` с теми же настройками.
+
 ## Структура
 
 ```

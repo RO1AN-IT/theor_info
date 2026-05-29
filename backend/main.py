@@ -9,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from aes_protocol import aes_decrypt, aes_encrypt, random_iv_hex
+from conditional_entropy import compute_conditional_entropies
 from lz78_codec import lz78_decode, lz78_encode
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -46,6 +47,12 @@ class AesDecryptRequest(BaseModel):
     key_bits: int = Field(256, ge=128, le=256)
 
 
+class EntropyRequest(BaseModel):
+    matrix: str | list[list[float]] = ""
+    labels_x: list[str] = Field(default_factory=list)
+    labels_y: list[str] = Field(default_factory=list)
+
+
 @app.get("/api/health")
 def health():
     return {"status": "ok", "backend": "python"}
@@ -79,6 +86,16 @@ def api_aes_encrypt(body: AesEncryptRequest):
         if body.key_bits not in (128, 192, 256):
             raise ValueError("Длина ключа AES: 128, 192 или 256 бит")
         return aes_encrypt(body.plaintext, body.passphrase, body.key_bits, body.iv_hex)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post("/api/entropy/compute")
+def api_entropy_compute(body: EntropyRequest):
+    try:
+        lx = body.labels_x if body.labels_x else None
+        ly = body.labels_y if body.labels_y else None
+        return compute_conditional_entropies(body.matrix, lx, ly)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
